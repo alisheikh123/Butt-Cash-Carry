@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Inventory_Management_Systems.Models.tblAccount>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h5 class="text-center">List of Account Holders</h5>
+
+@await Html.PartialAsync("PagesPV/AccountDetailPV")
+
+
+<table class="table compact nowrap" id="table_id">
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>
+                Account Code
+            </th>
+            <th>
+                Account Title
+            </th>
+            <th>
+                Phone No
+            </th>
+            <th>
+                Mobile No
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Account Holder Type
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.accountId" class="btn btn-primary btn-xs"><i class="fa fa-pen"></i> Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.accountId" class="btn btn-warning btn-xs"><i class="fa fa-question-circle"></i> Details</a>
+                    <a asp-action="" asp-route-id="@item.accountId" class="btn btn-danger btn-xs" id = "@item.accountId"  onclick="deletes(this.id)"><i class="fa fa-trash"></i> Delete</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.accountCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.accountTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobileNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TblAccountHead.accountHeadName)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/js/site.js"></script>
+<script>
+    $(document).ready(function () {
+
+        var tab = $("#table_id").DataTable({
+            "lengthMenu": [[8, 10, 50, -1], [8, 10, 50, "All"]],
+            responsive: true
+        });
+
+    });
+</script>

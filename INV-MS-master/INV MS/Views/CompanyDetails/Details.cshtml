@@ -1,0 +1,82 @@
+﻿@model INV_MS.Models.tblCompanyDetail
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="border-primary">
+<h4 class="text-center">Detail of Company Details</h4>
+ </div>
+<div>
+  
+    <hr />
+    <dl class="row text-center">
+        <dt class="col-sm-5">
+            Company Name
+        </dt>
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.TblCompany.Name)
+        </dd>
+        <dt class="col-sm-5">
+            Company Code
+        </dt>
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.TblCompany.CompanyrCode)
+        </dd>
+
+        <dt class="col-sm-5 ">
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.PhoneNo)
+        </dt>
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.PhoneNo)
+        </dd>
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </dt>
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.TotalAmount)
+        </dd>
+        @*<dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.PaidAmount)
+        </dt>
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.PaidAmount)
+        </dd>
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.RemainingAmount)
+        </dt>
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.RemainingAmount)
+        </dd>*@
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.dateoforder)
+        </dt>
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.dateoforder)
+        </dd>
+        <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.dateofpayment)
+        </dt>
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.dateofpayment)
+        </dd>
+        
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-warning">Edit</a> |
+    <a asp-action="List" class="btn btn-sm btn-primary">Back to List</a>
+</div>

@@ -1,0 +1,181 @@
+﻿@model INV_MS.Models.ViewModel.CompanyVM
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h5 class="text-center">Add New Company Detail</h5>
+<div class="row col-md-12">
+    <div class="col-md-5">
+
+
+
+        <button class="btn btn-primary btn-xs" id="Refresh"><i class="fas fa-undo"> Refresh</i></button> &nbsp;
+        <a class="btn btn-outline-secondary btn-xs" asp-controller="CompanyDetails" asp-action="List"><i class="fas fa-arrow-alt-circle-left"> All Company Details</i></a>
+
+
+    </div>
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-2">
+
+    </div>
+    <br /><br />
+    @Html.Hidden("RedirectTo", Url.Action("List", "CompanyDetails"))
+    <form id="log">
+
+
+
+        <div id="categoryModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add New Company</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label">Company Name</label>
+
+                            <input class="form-control col-md-8" id="CompanyNm" type="text" />
+                            <span class="text-danger" id="compnmValidation"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Company Code</label>
+
+                            <input class="form-control col-md-8" id="CompanyCode" type="text" />
+                            <span class="text-danger" id="compcodeValidation"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+
+                            <input class="form-control col-md-8" id="Email" type="text" />
+                            <span class="text-danger" id="EmailValidation"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Contact</label>
+
+                            <input class="form-control col-md-8" id="Contact" type="number" />
+                            <span class="text-danger" id="ContactValidation"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Address</label>
+
+                            <input class="form-control col-md-8" id="Address" type="text" />
+                            <span class="text-danger" id="AddressValidation"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="AddCompany">Add</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row col-lg-12">
+
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="control-label">Company Name</label>&emsp;&emsp;&emsp;&emsp;<i class="fas fa-plus-circle" title="Add New Company" style="color:black" id="addcat"></i>
+                    <select class="form-control comp" asp-items="ViewBag.companyId">
+                        <option value="0">--Select Company--</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="control-label">Product Name</label>
+                    <input class="form-control ProductName" />
+                    <span id="ProductNameValidation" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="control-label">Description</label>
+                    <input class="form-control Description" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="control-label">Phone No</label>
+                    <input class="form-control PhoneNo" type="number" />
+                </div>
+            </div>
+        </div>
+        <div class="row col-lg-12 ">
+
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="control-label">Total Amount</label>
+                    <input class="form-control TotalAmount" type="number" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+
+
+            @*<div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="control-label">Paid Amount</label>
+                        <input class="form-control PaidAmount" type="number"/>
+                        <span  class="text-danger"></span>
+                    </div>
+                </div>*@
+            @*<div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="control-label">Remaining Amount</label>
+                        <input  class="form-control RemainingAmount" disabled  type="number"/>
+                        <span  class="text-danger"></span>
+                    </div>
+                </div>*@
+
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="control-label">Date of Order</label>
+                    <input class="form-control dateoforder" type="date" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="control-label">Date of Payment</label>
+                    <input class="form-control dateofpayment" type="date" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <button class="btn btn-success btn-sm " id="savecompDetail" style="margin-top:35px;"><i class="fa fa-save"> Save</i></button>
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script src="~/js/site.js"></script>
+<script>
+    $(document).ready(function () {
+
+        var tab = $("#tableid").DataTable({
+            "lengthMenu": [[4, 10, 50, -1], [4, 10, 50, "All"]],
+            responsive: true
+        });
+
+
+
+    });
+    
+
+
+</script>

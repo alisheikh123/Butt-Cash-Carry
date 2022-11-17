@@ -1,0 +1,178 @@
+﻿@model IEnumerable<INV_MS.Models.tblCompanyDetail>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="text-center py-3"><strong>All Companies Detail</strong></h3>
+
+<p>
+    <div class="row col-md-12">
+
+        <div class="col-md-0">
+            &nbsp;&nbsp;<a asp-action="Company" class="btn btn-success "><i class="fa fa-plus">Add Company Payment Detail</i></a>
+             
+
+        </div>
+       
+        <div class="col-md-3">
+          @*  <a asp-action="" class="btn btn-info" style="float:right;"><i class="fas fa-file-pdf"></i></a>*@
+            
+        </div>
+
+
+
+
+    </div>
+</p>
+
+
+
+
+
+<table class="table table-bordered table-avatar" id="tableid">
+    <thead>
+        <tr>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Total Amount
+            </th>
+            <th>
+                Payable
+            </th>
+
+            <th>
+                Date of Order
+            </th>
+            <th>
+                Date of Payment
+            </th>
+
+
+            <th>Action</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+       
+            @foreach (var items in Model)
+            {
+        <tr>
+            <td>
+                @items.TblCompany.Name
+            </td>
+            <td>
+                @items.ProductName
+            </td>
+            <td>
+                @items.Description
+            </td>
+
+            <td>
+                @items.TotalAmount
+            </td>
+            <td>
+                @items.TotalAmountReceived
+            </td>
+
+            <td>
+                @items.dateoforder
+            </td>
+            <td>
+                @items.dateofpayment
+            </td>
+
+
+            <td>
+                <a asp-action="Edit" tooltip="Edit" class="btn btn-primary btn-xs" asp-route-id="@items.Id"><i class="fa fa-pen"></i> </a>
+                <a asp-action="Details" class="btn btn-warning btn-xs" asp-route-id="@items.Id"><i class="fa fa-question-circle"></i></a>
+                <a asp-action="Delete" class="btn btn-danger btn-xs" asp-route-id="@items.Id"><i class="fa fa-trash"></i> </a>
+                @if (items.TotalAmount == items.TotalAmountReceived)
+                {
+
+                }
+                else
+                {
+
+                    <a asp-action="PaymentDetail" class="btn btn-info btn-xs" asp-route-id="@items.Id"><i class="fa fa-dollar-sign">Pay Now</i> </a>
+                }
+
+            </td>
+            <td>
+                @if (items.TotalAmount == items.TotalAmountReceived)
+                {
+                    <label class="btn btn-success btn-xs" asp-route-id="@items.Id"><i class="">Paid</i> </label>
+                }
+                else
+                {
+
+                    <label class="btn btn-danger btn-xs" asp-route-id="@items.Id"><i class="">Un-Paid</i> </label>
+                }
+
+
+            </td>
+        </tr>
+            }
+
+     
+
+
+
+
+    </tbody>
+</table>
+
+<script src="~/js/site.js"></script>
+<script type="text/javascript">
+
+
+    function list() {
+        debugger;
+        var rece = $("#received").val();
+        var paid = $("#paid").val();
+
+
+        $.ajax({
+            url: "/CompanyDetails/ListofRemaing",
+            type: "GET",
+            data: { ReceivableID: rece, PayableId: paid },
+            success: function (output) {
+                alert("hy");
+
+            },
+            error: function (output) {
+
+
+            }
+
+        });
+
+
+
+
+
+
+    }
+    $(document).ready(function () {
+
+        var tab = $("#tableid").DataTable({
+            "lengthMenu": [[6, 10, 50, -1], [6, 10, 50, "All"]],
+            responsive: true
+        });
+
+
+
+    });
+
+
+
+
+</script>
